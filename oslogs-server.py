@@ -12,7 +12,7 @@ HOSTS = {}
 
 def main():
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host='192.168.37.100'))
+        pika.ConnectionParameters(host='0.0.0.0'))
     channel = connection.channel()
     channel.queue_declare(queue='oslogs')
 
