@@ -1,12 +1,19 @@
 #!/usr/bin/env python
 import os
+import re
 import json
 import traceback
 
 import pika
 
 
-LOGS_FOLDER = '/var/log/oslogs'
+try:
+    fin = open('oslogs-server.conf', 'r')
+    LOGS_FOLDER = re.search('LOGS_FOLDER=(.*)', fin.read()).group(1).strip()
+    print 'LOGS_FOLDER found in config: "%s"' % LOGS_FOLDER
+except Exception, err:
+    print 'LOGS_FOLDER not found in config. Using "/var/log/oslogs"'
+    LOGS_FOLDER = '/var/log/oslogs'
 HOSTS = {}
 
 
